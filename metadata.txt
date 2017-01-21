@@ -1,0 +1,39 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Lidar Slovenia Data Downloader
+qgisMinimumVersion=2.0
+description=Plugin for downloading data from Lidar Scanning of Slovenia (LSS)
+version=1.0
+author=Nejc Dougan
+email=nejc.dougan@gmail.com
+
+about=# Get LSS Plugin #### QGis plugin for downloading Lidar Survey of Slovenia This plugin is intended to make downloading of Lidar Survey of Slovenia (LSS), easier.
+
+tracker=https://github.com/nejcd/LidarSloveniaDataDownloader
+repository=https://github.com/nejcd/LidarSloveniaDataDownloader
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+# changelog=
+
+# Tags are comma separated with spaces allowed
+tags=remote sensing, web, downloader, lidar, lss, slovenia, dmr, dem, elevation, point cloud
+
+homepage=https://github.com/nejcd/LidarSloveniaDataDownloader
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
