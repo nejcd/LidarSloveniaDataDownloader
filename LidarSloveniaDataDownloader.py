@@ -294,7 +294,10 @@ class LidarSloveniaDataDownloader:
                 self.msgBar.pushMessage("Download of tile {0}_{1} failed!".format(tile[0], tile[1]),
                                         level=QgsMessageBar.WARNING)
 
-        self.msgBar.pushMessage("Finished!", level=QgsMessageBar.INFO)
+        self.msgBar.clearWidgets()
+        self.msgBar.pushMessage("Finished!", level=QgsMessageBar.SUCCESS)
+
+
 
     def select_output_folder(self):
         """Select output folder"""
