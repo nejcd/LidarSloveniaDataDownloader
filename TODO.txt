@@ -1,0 +1,5 @@
+TODO:
+
+1.) add support for .laz download
+2.) if download failed because of serverdowntime try reconecting one more time
+3.) Nicer looking Notification about download status (maybe pop-up window)
