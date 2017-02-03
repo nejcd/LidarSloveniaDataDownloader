@@ -7,20 +7,20 @@ This plugin is intended to make downloading of Lidar Scanning of Slovenia (LSS) 
 
 [Ministry of the environment and spatial planning of Republic of Slovenia](http://evode.arso.gov.si/indexd022.html?q=node/12), has enabled to download data of Lidar Scanning of Slovenia via internet. It is possible to obtain following data:
 
-- Georeferenced point cloud (OTR)
-- Georeferenced classified point cloud (GKOT)
+- Georeferenced point cloud (OTR) - for now just .zlas
+- Georeferenced classified point cloud (GKOT) for now just .zlas
 - Digital elevation model (DMR) 
 
 Data is available in two different Coordinate Reference Systems:
 
-- D48/GK ( [EPSG:3912](http://spatialreference.org/ref/epsg/3912/) )
-- D96/TM ( [EPSG:3794](http://spatialreference.org/ref/epsg/3794/) )
+- D48/GK ( [EPSG:3912](https://epsg.io/3912) )
+- D96/TM ( [EPSG:3794](https://epsg.io/3794) )
 
 [More information about data](http://evode.arso.gov.si/indexd697.html?q=node/32)
 
 ## How TO
 
-Install plugin trough QGIS Manage and install plugins or download source from GitHub and add all files and folders to your local QGIS directory (C:\Users\USER\.qgis2\python\plugins\LidarSloveniaDataDownloader )
+Install plugin trough QGIS Manage and install plugins or download source from GitHub and add all files and folders to your local QGIS directory (.qgis2\python\plugins\LidarSloveniaDataDownloader )
 
 Run plugin.
 
