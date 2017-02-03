@@ -13,7 +13,7 @@ This plugin is intended to make downloading of Lidar Scanning of Slovenia (LSS) 
 
 Data is available in two different Coordinate Reference Systems:
 
-- D48/GK ( [EPSG:2170](http://spatialreference.org/ref/epsg/2170/) )
+- D48/GK ( [EPSG:3912](http://spatialreference.org/ref/epsg/3912/) )
 - D96/TM ( [EPSG:3794](http://spatialreference.org/ref/epsg/3794/) )
 
 [More information about data](http://evode.arso.gov.si/indexd697.html?q=node/32)
