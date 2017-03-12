@@ -7,8 +7,8 @@ This plugin is intended to make downloading of Lidar Scanning of Slovenia (LSS) 
 
 [Ministry of the environment and spatial planning of Republic of Slovenia](http://evode.arso.gov.si/indexd022.html?q=node/12), has enabled to download data of Lidar Scanning of Slovenia via internet. It is possible to obtain following data:
 
-- Georeferenced point cloud (OTR) - for now just .zlas
-- Georeferenced classified point cloud (GKOT) for now just .zlas
+- Georeferenced point cloud (OTR) - zlas, laz
+- Georeferenced classified point cloud (GKOT) - zlas, laz
 - Digital elevation model (DMR) 
 
 Data is available in two different Coordinate Reference Systems:
@@ -26,7 +26,7 @@ Run plugin.
 
 - Select Coordinate Reference System and then press Load tiles
 - Select tiles you need; by hand, by attributes or by Spatial query (Install plugin Spatial query)
-- Select product (OTR, GKOT, DMR)
+- Select product (OTR(zlas), OTR(laz), GKOT(zlas), GKOT(laz), DMR)
 - Select download folder
 - Start downloading
 
