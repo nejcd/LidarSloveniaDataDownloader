@@ -80,7 +80,7 @@ class LidarSloveniaDataDownloader:
 
         #Constants
         self.crs = ['D96TM', 'D48GK']
-        self.product =['OTR', 'GKOT', 'DMR']
+        self.product =['OTR(zlas)', 'OTR(laz) ', 'GKOT(zlas)', 'GKOT(laz) ',  'DMR']
 
 
     # noinspection PyMethodMayBeStatic

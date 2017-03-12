@@ -37,13 +37,26 @@ def getLSS(tile, CRS, product, destination):
 
     fileurl = urllib.URLopener()
 
-    if product == 'OTR':
+    print product
+
+    if product == 'OTR(zlas)':
+        productname = 'OTR'
         extension = 'zlas'
         fileprefix = 'R'
-    elif product == 'GKOT':
+    elif product == 'OTR(laz) ':
+        productname = 'OTR/laz'
+        extension = 'laz'
+        fileprefix = 'R'
+    elif product == 'GKOT(zlas)':
+        productname = 'GKOT'
         extension = 'zlas'
         fileprefix = ''
+    elif product == 'GKOT(laz) ':
+        productname = 'GKOT/laz'
+        extension = 'laz'
+        fileprefix = ''
     elif product == 'DMR':
+        productname = product
         extension = 'asc'
         fileprefix = '1'
         product = 'dmr1'
@@ -52,10 +65,16 @@ def getLSS(tile, CRS, product, destination):
     filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
     print 'Downloading: ' + filename
     download = False
-    url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(product, block_number, CRS, filename)
+    # if product == 'OTR(laz) ' or product == 'GKOT(laz) ':
+    #     url = 'http://gis.arso.gov.si/lidar/{0}/laz/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
+    #     print url
+    # else:
+    url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
+    print url
     try:
         fileurl.retrieve(url, destination + '/' + filename)
         download = True
+        print url
     except:
         next
     if download:
