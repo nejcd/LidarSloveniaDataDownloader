@@ -7,7 +7,7 @@ import getLSS as lss
 
 tile = [441, 136, 31] 
 CRS = 'D48GK' 
-product = 'DMR'
+product = 'OTR(laz) '
 destination = '/Users/nejc/Downloads'
 
 
@@ -37,4 +37,4 @@ elif product == 'DMR':
 filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
 print 'Testing: ' + filename
 
-lss.getLSS(tile, CRS, product, destination)
+lss.getLSSrequests(tile, CRS, product, destination)

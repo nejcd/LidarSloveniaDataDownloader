@@ -21,10 +21,11 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt4.QtGui import QAction, QIcon, QFileDialog
+from PyQt4.QtGui import QAction, QIcon, QFileDialog, QProgressBar
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayerRegistry
 import qgis
+
 # Initialize Qt resources from file resources.py
 import resources
 
@@ -32,8 +33,10 @@ import resources
 from LidarSloveniaDataDownloader_dockwidget import LidarSloveniaDataDownloaderDockWidget
 import os.path
 import os
-import getLSS as lss
 import datetime
+import requests
+import sys
+import time
 
 class LidarSloveniaDataDownloader:
     """QGIS Plugin Implementation."""
@@ -265,6 +268,68 @@ class LidarSloveniaDataDownloader:
             tileNames.append([int(tileE), int(tileN), int(block_number)])
         return tileNames
 
+    def getUrlAndFilename(self, tile, CRS, product):
+        if product == 'OTR(zlas)':
+            productname = 'OTR'
+            extension = 'zlas'
+            fileprefix = 'R'
+        elif product == 'OTR(laz) ':
+            productname = 'OTR/laz'
+            extension = 'laz'
+            fileprefix = 'R'
+        elif product == 'GKOT(zlas)':
+            productname = 'GKOT'
+            extension = 'zlas'
+            fileprefix = ''
+        elif product == 'GKOT(laz) ':
+            productname = 'GKOT/laz'
+            extension = 'laz'
+            fileprefix = ''
+        elif product == 'DMR':
+            productname = 'dmr1'
+            extension = 'asc'
+            fileprefix = '1'
+
+        [tileE, tileN, block_number] = tile
+        filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
+        url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
+        return url, filename
+
+
+    def downloadLSS(self, url, filename, destination, n, ntiles):
+        msg = "Downloading file ({0}/{1}): {2}".format(n + 1, ntiles, filename)
+        progressMessageBar = self.msgBar.createMessage(msg)
+        progress = QProgressBar()
+        progress.setMaximum(100)
+        progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        progressMessageBar.layout().addWidget(progress)
+        self.msgBar.pushWidget(progressMessageBar, level=QgsMessageBar.INFO)
+
+        with open(destination + '/' + filename, "wb") as file:
+            print "Downloading: " + filename
+            response = requests.get(url, stream=True)
+            total_length = response.headers.get('content-length')
+    
+            if total_length is None: 
+                file.write(response.content)
+            else:
+                dl = 0
+                total_length = int(total_length)
+                for data in response.iter_content(chunk_size=4096):
+                    dl += len(data)
+                    file.write(data)
+                    done = int(100 * dl / total_length)
+                    progress.setValue(done)
+                    print done
+                download = True    
+        if download:
+            print '\nDone downloading: ' + filename
+            time.sleep(1)
+        else:
+            print 'Download failed: ' + filename
+    
+        return download
+
     def download(self):
         tileNames = self.getTileNames()
         indexCRS = self.dockwidget.comboBoxGridLayer.currentIndex()
@@ -283,7 +348,8 @@ class LidarSloveniaDataDownloader:
 
         for tile in tileNames:
             t0 = datetime.datetime.now()
-            download = lss.getLSS(tile, self.crs[indexCRS], self.product[indexProduct], destination)
+            url, filename = self.getUrlAndFilename(tile, self.crs[indexCRS], self.product[indexProduct])
+            download = self.downloadLSS(url, filename, destination, n, ntiles)
             n += 1
             time = datetime.datetime.now() - t0
             if download:
@@ -297,13 +363,10 @@ class LidarSloveniaDataDownloader:
         self.msgBar.clearWidgets()
         self.msgBar.pushMessage("Finished!", level=QgsMessageBar.SUCCESS)
 
-
-
     def select_output_folder(self):
         """Select output folder"""
         folder = QFileDialog.getExistingDirectory(self.dockwidget, "Select folder")
         self.dockwidget.lineOutput.setText(folder)
-
 
     def run(self):
         """Run method that loads and starts the plugin"""

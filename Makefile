@@ -38,13 +38,13 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	LidarSloveniaDataDownloader.py LidarSloveniaDataDownloader_dockwidget.py getLSS.py
+	LidarSloveniaDataDownloader.py LidarSloveniaDataDownloader_dockwidget.py 
 
 PLUGINNAME = LidarSloveniaDataDownloader
 
 PY_FILES = \
 	__init__.py \
-	LidarSloveniaDataDownloader.py LidarSloveniaDataDownloader_dockwidget.py getLSS.py
+	LidarSloveniaDataDownloader.py LidarSloveniaDataDownloader_dockwidget.py 
 
 UI_FILES = LidarSloveniaDataDownloader_dockwidget_base.ui
 

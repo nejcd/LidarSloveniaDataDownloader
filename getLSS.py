@@ -22,6 +22,8 @@
 
 import urllib
 import time
+import requests
+import sys
 
 def getLSS(tile, CRS, product, destination):
     """Download LIDAR Slovenia
@@ -61,11 +63,13 @@ def getLSS(tile, CRS, product, destination):
 
     [tileE, tileN, block_number] = tile
     filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
+
     print 'Downloading: ' + filename
     download = False
 
     url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
     print url
+
     try:
         fileurl.retrieve(url, destination + '/' + filename)
         download = True
@@ -78,6 +82,77 @@ def getLSS(tile, CRS, product, destination):
         print 'Download failed'
 
     return download
+
+def getLSSrequests(tile, CRS, product, destination, progressBar = None):
+    """Download LIDAR Slovenia
+    :param tile: Tiles (E, N, Block)
+    :type tile: int
+    :param CRS: Coordinate system D96TM or D48GK
+    :type CRS: string
+    :param product: Point Cloud (OTR), Classified Point Cloud (GKOT), Digital Elevation Model (DMR)
+    :type product: string
+    :param destination: Folder location
+    :type destination: string
+    """
+
+    if product == 'OTR(zlas)':
+        productname = 'OTR'
+        extension = 'zlas'
+        fileprefix = 'R'
+    elif product == 'OTR(laz) ':
+        productname = 'OTR/laz'
+        extension = 'laz'
+        fileprefix = 'R'
+    elif product == 'GKOT(zlas)':
+        productname = 'GKOT'
+        extension = 'zlas'
+        fileprefix = ''
+    elif product == 'GKOT(laz) ':
+        productname = 'GKOT/laz'
+        extension = 'laz'
+        fileprefix = ''
+    elif product == 'DMR':
+        productname = 'dmr1'
+        extension = 'asc'
+        fileprefix = '1'
+
+    [tileE, tileN, block_number] = tile
+    filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
+
+
+    download = False
+
+    url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
+    with open(destination + '/' + filename, "wb") as file:
+        print "Downloading : %s" % filename
+        response = requests.get(url, stream=True)
+        total_length = response.headers.get('content-length')
+
+        if total_length is None: 
+            file.write(response.content)
+        else:
+            dl = 0
+            total_length = int(total_length)
+            for data in response.iter_content(chunk_size=4096):
+                dl += len(data)
+                file.write(data)
+                done = int(50 * dl / total_length)
+                sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done)) )    
+                sys.stdout.flush()
+                if progressBar:
+                    progress.setValue(done/10)
+            download = True
+
+
+    if download:
+        print '\nDone downloading: ' + filename
+        time.sleep(1)
+    else:
+        print 'Download failed'
+
+    return download
+
+
 
 
 def creatListOfTiles(startE, startN, endE, endN):
