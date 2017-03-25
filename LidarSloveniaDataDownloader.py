@@ -322,7 +322,7 @@ class LidarSloveniaDataDownloader:
                     done = int(100 * dl / total_length)
                     progress.setValue(done)
                     print done
-                downloaded = True    
+            downloaded = True    
         if downloaded:
             print '\nDone downloading: ' + filename
             time.sleep(1)
