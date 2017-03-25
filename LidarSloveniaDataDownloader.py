@@ -304,6 +304,7 @@ class LidarSloveniaDataDownloader:
         progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
         progressMessageBar.layout().addWidget(progress)
         self.msgBar.pushWidget(progressMessageBar, level=QgsMessageBar.INFO)
+        downloaded = False
 
         with open(destination + '/' + filename, "wb") as file:
             print "Downloading: " + filename
@@ -321,14 +322,14 @@ class LidarSloveniaDataDownloader:
                     done = int(100 * dl / total_length)
                     progress.setValue(done)
                     print done
-                download = True    
-        if download:
+                downloaded = True    
+        if downloaded:
             print '\nDone downloading: ' + filename
             time.sleep(1)
         else:
             print 'Download failed: ' + filename
     
-        return download
+        return downloaded
 
     def download(self):
         tileNames = self.getTileNames()
@@ -343,16 +344,17 @@ class LidarSloveniaDataDownloader:
 
         n = 0
         ntiles = len(tileNames)
+        downloaded = False
 
         self.msgBar.pushMessage("Start downloading {0} files...".format(ntiles), level=QgsMessageBar.INFO)
 
         for tile in tileNames:
             t0 = datetime.datetime.now()
             url, filename = self.getUrlAndFilename(tile, self.crs[indexCRS], self.product[indexProduct])
-            download = self.downloadLSS(url, filename, destination, n, ntiles)
+            downloaded = self.downloadLSS(url, filename, destination, n, ntiles)
             n += 1
             time = datetime.datetime.now() - t0
-            if download:
+            if downloaded:
                 self.msgBar.pushMessage("{0} of {1} files. Estimate time to finish: {2}".format(n, ntiles,
                                     (ntiles - n) * time),
                                     level=QgsMessageBar.INFO)
