@@ -2,39 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed1cbc57-c02d-446a-9073-f584f7c8a402" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LidarSloveniaDataDownloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/LidarSloveniaDataDownloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LidarSloveniaDataDownloader_dockwidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/LidarSloveniaDataDownloader_dockwidget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getLSS.py" beforeDir="false" afterPath="$PROJECT_DIR$/getLSS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/doctrees/environment.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/doctrees/index.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/.buildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/basic.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/classic.css" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/classic.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/doctools.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/doctools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/pygments.css" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/pygments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/searchtools.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/searchtools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/_static/websupport.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/_static/websupport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/help/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metadata.txt" beforeDir="false" afterPath="$PROJECT_DIR$/metadata.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pb_tool.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/pb_tool.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugin_upload.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/qgis_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/qgis_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_LidarSloveniaDataDownloader_dockwidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_LidarSloveniaDataDownloader_dockwidget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_qgis_environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_qgis_environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_translations.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_translations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/utilities.py" afterDir="false" />
     </list>
     <ignored path="LidarSloveniaDataDownloader.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LidarSloveniaDataDownloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="321" column="17" lean-forward="true" selection-start-line="321" selection-start-column="17" selection-end-line="321" selection-end-column="17" />
+            <state relative-caret-position="300">
+              <caret line="371" column="25" lean-forward="true" selection-start-line="371" selection-start-column="25" selection-end-line="371" selection-end-column="25" />
               <folding>
                 <element signature="e#1191#1228#0" expanded="true" />
               </folding>
@@ -255,12 +223,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485030590451</updated>
-      <workItem from="1582819914798" duration="3367000" />
+      <workItem from="1582819914798" duration="3432000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3367000" />
+    <option name="totallyTimeSpent" value="3432000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="0" width="3840" height="2160" extended-state="6" />
@@ -362,8 +330,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LidarSloveniaDataDownloader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="321" column="17" lean-forward="true" selection-start-line="321" selection-start-column="17" selection-end-line="321" selection-end-column="17" />
+        <state relative-caret-position="300">
+          <caret line="371" column="25" lean-forward="true" selection-start-line="371" selection-start-column="25" selection-end-line="371" selection-end-column="25" />
           <folding>
             <element signature="e#1191#1228#0" expanded="true" />
           </folding>

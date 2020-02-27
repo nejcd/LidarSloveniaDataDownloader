@@ -367,6 +367,7 @@ class LidarSloveniaDataDownloader(object):
                 # self.msgBar.pushInfo(status_msg)
                 print(status_msg)
             else:
+                print('Warning')
                 # self.msgBar.pushWarning("Warning", "Download of tile {0}_{1} failed!".format(tile[0], tile[1]))
         print('finished')
         self.msgBar.clearWidgets()
