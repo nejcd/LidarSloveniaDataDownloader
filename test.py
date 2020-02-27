@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-import getLSS as lss
+from __future__ import print_function
+from __future__ import absolute_import
+from . import getLSS as lss
 
 #http://gis.arso.gov.si/lidar/dmr1/b_31/D48GK/GK1_441_136.asc
 
@@ -35,6 +37,7 @@ elif product == 'DMR':
 
 [tileE, tileN, block_number] = tile
 filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
-print 'Testing: ' + filename
+# fix_print_with_import
+print('Testing: ' + filename)
 
 lss.getLSSrequests(tile, CRS, product, destination)

@@ -20,17 +20,21 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt4.QtGui import QAction, QIcon, QFileDialog, QProgressBar
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import object
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
+from qgis.PyQt.QtWidgets import QAction, QFileDialog, QProgressBar
+from qgis.PyQt.QtGui import QIcon
 from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayerRegistry
+from qgis.core import QgsProject
 import qgis
 
 # Initialize Qt resources from file resources.py
-import resources
+from . import resources
 
 # Import the code for the DockWidget
-from LidarSloveniaDataDownloader_dockwidget import LidarSloveniaDataDownloaderDockWidget
+from .LidarSloveniaDataDownloader_dockwidget import LidarSloveniaDataDownloaderDockWidget
 import os.path
 import os
 import datetime
@@ -38,7 +42,7 @@ import requests
 import sys
 import time
 
-class LidarSloveniaDataDownloader:
+class LidarSloveniaDataDownloader(object):
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
@@ -116,7 +120,7 @@ class LidarSloveniaDataDownloader:
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
-            path (e.g. ':/plugins/foo/bar.png') or a normal file system path.
+            path (e.g. ':/plugins/foo/bar.png') or a normalized file system path.
         :type icon_path: str
 
         :param text: Text that should be shown in menu items for this action.
@@ -221,14 +225,15 @@ class LidarSloveniaDataDownloader:
     #--------------------------------------------------------------------------
     def unloadGrid(self, layername):
         """Unload Grid"""
-        layers = self.iface.legendInterface().layers()
+        layers = [layer for layer in QgsProject.instance().mapLayers().values()]
+
         for layer in layers:
             if layer.name() == layername:
-                QgsMapLayerRegistry.instance().removeMapLayer(layer.id())
+                QgsProject.instance().removeMapLayer(layer.id())
 
     def getLayerNames(self):
         """"Get layer names"""
-        layers = self.iface.legendInterface().layers()
+        layers = [layer for layer in QgsProject.instance().mapLayers().values()]
         layer_list = []
         for layer in layers:
             layer_list.append(layer.name())
@@ -254,7 +259,8 @@ class LidarSloveniaDataDownloader:
         index = self.dockwidget.comboBoxGridLayer.currentIndex()
         layer = self.iface.addVectorLayer(grid_layer_path[index], layer_names[index], "ogr")
         if not layer:
-            print "Layer failed to load!"
+            # fix_print_with_import
+            print("Layer failed to load!")
 
     def getTileNames(self):
         tileNames = []
@@ -301,13 +307,13 @@ class LidarSloveniaDataDownloader:
         progressMessageBar = self.msgBar.createMessage(msg)
         progress = QProgressBar()
         progress.setMaximum(100)
-        progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        progress.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
         progressMessageBar.layout().addWidget(progress)
-        self.msgBar.pushWidget(progressMessageBar, level=QgsMessageBar.INFO)
+        self.msgBar.pushWidget(progressMessageBar)
         downloaded = False
 
         with open(destination + '/' + filename, "wb") as file:
-            print "Downloading: " + filename
+            print("Downloading: " + filename)
             response = requests.get(url, stream=True)
             total_length = response.headers.get('content-length')
     
@@ -321,13 +327,13 @@ class LidarSloveniaDataDownloader:
                     file.write(data)
                     done = int(100 * dl / total_length)
                     progress.setValue(done)
-                    print done
+                    print(done)
             downloaded = True    
         if downloaded:
-            print '\nDone downloading: ' + filename
+            print('\nDone downloading: ' + filename)
             time.sleep(1)
         else:
-            print 'Download failed: ' + filename
+            print('Download failed: ' + filename)
     
         return downloaded
 
@@ -346,8 +352,9 @@ class LidarSloveniaDataDownloader:
         ntiles = len(tileNames)
         downloaded = False
 
-        self.msgBar.pushMessage("Start downloading {0} files...".format(ntiles), level=QgsMessageBar.INFO)
-
+        start_msg = "Started", "Start downloading {0} files...".format(ntiles)
+        # self.msgBar.pushInfo(start_msg)
+        print(start_msg)
         for tile in tileNames:
             t0 = datetime.datetime.now()
             url, filename = self.getUrlAndFilename(tile, self.crs[indexCRS], self.product[indexProduct])
@@ -355,15 +362,15 @@ class LidarSloveniaDataDownloader:
             n += 1
             time = datetime.datetime.now() - t0
             if downloaded:
-                self.msgBar.pushMessage("{0} of {1} files. Estimate time to finish: {2}".format(n, ntiles,
-                                    (ntiles - n) * time),
-                                    level=QgsMessageBar.INFO)
+                status_msg = "Status", "{0} of {1} files. Estimate time to finish: {2}".format(n, ntiles,
+                                    (ntiles - n) * time)
+                # self.msgBar.pushInfo(status_msg)
+                print(status_msg)
             else:
-                self.msgBar.pushMessage("Download of tile {0}_{1} failed!".format(tile[0], tile[1]),
-                                        level=QgsMessageBar.WARNING)
-
+                # self.msgBar.pushWarning("Warning", "Download of tile {0}_{1} failed!".format(tile[0], tile[1]))
+        print('finished')
         self.msgBar.clearWidgets()
-        self.msgBar.pushMessage("Finished!", level=QgsMessageBar.SUCCESS)
+        # self.msgBar.pushSuccess("Finished!", "Finished")
 
     def select_output_folder(self):
         """Select output folder"""
@@ -377,7 +384,8 @@ class LidarSloveniaDataDownloader:
         if not self.pluginIsActive:
             self.pluginIsActive = True
 
-            print "** STARTING LidarSloveniaDataDownloader"
+            # fix_print_with_import
+            print("** STARTING LidarSloveniaDataDownloader")
 
             # dockwidget may not exist if:
             #    first run of plugin

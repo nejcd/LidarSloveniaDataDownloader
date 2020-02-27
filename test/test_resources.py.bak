@@ -14,7 +14,7 @@ __copyright__ = 'Copyright 2017, Nejc Dougan'
 
 import unittest
 
-# from qgis.PyQt.QtGui import QIcon
+from PyQt4.QtGui import QIcon
 
 
 
@@ -32,7 +32,7 @@ class LidarSloveniaDataDownloaderDialogTest(unittest.TestCase):
     def test_icon_png(self):
         """Test we can click OK."""
         path = ':/plugins/LidarSloveniaDataDownloader/icon.png'
-        # icon = QIcon(path)
+        icon = QIcon(path)
         self.assertFalse(icon.isNull())
 
 if __name__ == "__main__":

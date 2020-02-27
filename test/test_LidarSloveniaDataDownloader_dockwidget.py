@@ -7,6 +7,7 @@
      (at your option) any later version.
 
 """
+from __future__ import absolute_import
 
 __author__ = 'nejc.dougan@gmail.com'
 __date__ = '2017-01-21'
@@ -14,11 +15,11 @@ __copyright__ = 'Copyright 2017, Nejc Dougan'
 
 import unittest
 
-from PyQt4.QtGui import QDockWidget
+from qgis.PyQt.QtWidgets import QDockWidget
 
 from LidarSloveniaDataDownloader_dockwidget import LidarSloveniaDataDownloaderDockWidget
 
-from utilities import get_qgis_app
+from .utilities import get_qgis_app
 
 QGIS_APP = get_qgis_app()
 

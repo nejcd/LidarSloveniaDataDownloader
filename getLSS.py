@@ -19,8 +19,9 @@
  *                                                                         *
  ***************************************************************************/
 """
-
-import urllib
+from future import standard_library
+standard_library.install_aliases()
+import urllib.request, urllib.parse, urllib.error
 import time
 import requests
 import sys
@@ -37,7 +38,7 @@ def getLSS(tile, CRS, product, destination):
     :type destination: string
     """
 
-    fileurl = urllib.URLopener()
+    fileurl = urllib.request.URLopener()
 
     if product == 'OTR(zlas)':
         productname = 'OTR'
@@ -64,11 +65,11 @@ def getLSS(tile, CRS, product, destination):
     [tileE, tileN, block_number] = tile
     filename = '{0}{1}_{2}_{3}.{4}'.format(CRS[-2:], fileprefix, tileE, tileN, extension)
 
-    print 'Downloading: ' + filename
+    print('Downloading: ' + filename)
     download = False
 
     url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
-    print url
+    print(url)
 
     try:
         fileurl.retrieve(url, destination + '/' + filename)
@@ -76,10 +77,10 @@ def getLSS(tile, CRS, product, destination):
     except:
         next
     if download:
-        print 'Done downloading: ' + filename
+        print('Done downloading: ' + filename)
         time.sleep(1)
     else:
-        print 'Download failed'
+        print('Download failed')
 
     return download
 
@@ -124,7 +125,8 @@ def getLSSrequests(tile, CRS, product, destination, progressBar = None):
 
     url = 'http://gis.arso.gov.si/lidar/{0}/b_{1}/{2}/{3}'.format(productname, block_number, CRS, filename)
     with open(destination + '/' + filename, "wb") as file:
-        print "Downloading : %s" % filename
+        # fix_print_with_import
+        print("Downloading : %s" % filename)
         response = requests.get(url, stream=True)
         total_length = response.headers.get('content-length')
 
@@ -145,10 +147,12 @@ def getLSSrequests(tile, CRS, product, destination, progressBar = None):
 
 
     if download:
-        print '\nDone downloading: ' + filename
+        # fix_print_with_import
+        print('\nDone downloading: ' + filename)
         time.sleep(1)
     else:
-        print 'Download failed'
+        # fix_print_with_import
+        print('Download failed')
 
     return download
 
